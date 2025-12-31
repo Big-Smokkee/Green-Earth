@@ -29,7 +29,7 @@ const displayAllPlants = (datas) => {
     for (let data of datas) {
         const div = document.createElement('div');
         div.innerHTML = `
-        <div class="card w-[250px] bg-white p-4 space-y-[12px]">
+        <div class="card w-[240px] bg-white p-4 space-y-[12px]">
                     <img src="${data.image}" alt="" class="h-[300px] rounded-lg">
                     <h4 class="text-sm font-semibold inter">${data.name}</h4>
                     <p class="inter text-xs">A fast-growing tropical tree that produces delicious, juicy mangoes during summer. Its dense green</p>
@@ -37,7 +37,7 @@ const displayAllPlants = (datas) => {
                         <p class="btn rounded-full text-[#15803D] bg-[#DCFCE7] text-sm">${data.category}</p>
                         <p class="text-sm"><i class="fa-solid fa-bangladeshi-taka-sign"></i><span>${data.price}</span></p>
                     </div>
-                    <button class="btn btn-success bg-[#15803D] text-white rounded-full">Add to Cart</button>
+                    <button id="add-to-cart-btn" class="btn btn-success bg-[#15803D] text-white rounded-full">Add to Cart</button>
                 </div>
         `
         plantCardContainer.append(div);
@@ -59,7 +59,7 @@ const displayFeaturedPlant = (datas) => {
     for (let data of datas) {
         const div = document.createElement('div');
         div.innerHTML = `
-        <div class="card w-[250px] bg-white p-4 space-y-[12px]">
+        <div class="card w-[240px] bg-white p-4 space-y-[12px]">
                     <img src="${data.image}" alt="" class="h-[300px] rounded-lg">
                     <h4 class="text-sm font-semibold inter">${data.name}</h4>
                     <p class="inter text-xs">A fast-growing tropical tree that produces delicious, juicy mangoes during summer. Its dense green</p>
@@ -67,7 +67,7 @@ const displayFeaturedPlant = (datas) => {
                         <p class="btn rounded-full text-[#15803D] bg-[#DCFCE7] text-sm">${data.category}</p>
                         <p class="text-sm"><i class="fa-solid fa-bangladeshi-taka-sign"></i><span>${data.price}</span></p>
                     </div>
-                    <button class="btn btn-success bg-[#15803D] text-white rounded-full">Add to Cart</button>
+                    <button id='add-to-cart-btn' class="btn btn-success bg-[#15803D] text-white rounded-full">Add to Cart</button>
                 </div>
         `
         plantCardContainer.append(div);
