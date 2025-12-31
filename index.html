@@ -64,7 +64,7 @@
     <section class="bg-[#CFF0DC] mx-w-lg  grid grid-cols-1 md:grid-cols-4 items-center justify-center">
         <img src="./assets/hero-leaf1.png" alt="leaf" class="hidden md:block w-full h-auto">
         <div
-            class="hero-contents text-center space-y-4  col-span-2 my-[30px] flex flex-col justify-center items-center">
+            class="hero-contents text-center space-y-3  col-span-2 my-[30px] flex flex-col justify-center items-center">
             <h2 class="text-5xl font-bold">Plant a Tree, Grow a Future</h2>
             <p class="text-[#00000080]">Join our mission to plant 1 million trees and make the Earth greener for future
                 generations.</p>
@@ -74,14 +74,20 @@
         <img src="./assets/hero-leaf2.png" alt="leaf" class="hidden md:block">
     </section>
     <!-- tree choosing section -->
-    <section class="my-[100px] mx-[60px]">
-        <h2 class="text-4xl text-center mb-10">Choose Your Trees</h2>
+    <h2 class="text-4xl text-center mt-[100px] mb-[40px]">Choose Your Trees</h2>
+    <section class="mx-[60px] space-x-7 flex">
         <!-- left category section -->
-         <section>
+        <section>
             <h3 class="mb-4 font-semibold text-xl">Categories</h3>
+            <li class="h-10 flex items-center pl-[10px] hover:bg-[#15803D] text-black hover:text-white w-[180px] rounded-md" id="all-tree-li">All Trees</li>
             <div id="category-section">
             </div>
-         </section>
+        </section>
+        <!-- middle section for showing plant cards -->
+        <section>
+            <div id="plant-card-container" class="grid grid-cols-3 space-x-[15px] space-y-[15px]">  
+            </div>
+        </section>
     </section>
     <script src="./scripts/index.js"></script>
 </body>
