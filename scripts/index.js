@@ -11,15 +11,24 @@ displayCategories = (datas) => {
   const categoriesSection = document.getElementById("category-section");
   categoriesSection.innerHTML = "";
 
+    /////
+    const allTreeLi = document.getElementById("all-tree-li");
+    allTreeLi.classList.add("active-category");
+
   for (let data of datas) {
     const ul = document.createElement("ul");
     ul.innerHTML = `
-                    <li id ="list-${data.id}" onClick="loadFeaturedPlant('${data.id}')"class="h-10 flex items-center pl-[10px] hover:bg-[#15803D] text-black hover:text-white w-[180px] rounded-md pointer">${data.category_name}</li>
+                    <li id ="list-${data.id}" onClick="setActiveCategory('list-${data.id}');loadFeaturedPlant('${data.id}')"class="h-10 flex items-center pl-[10px] hover:bg-[#15803D] text-black hover:text-white w-[180px] rounded-md pointer">${data.category_name}</li>
         `;
     categoriesSection.append(ul);
   }
 };
+function setActiveCategory(selectedId){
+    document.querySelectorAll("#all-tree-li, #category-section li").forEach(li => li.classList.remove("active-category") );
+    document.getElementById(selectedId).classList.add("active-category");
+}
 loadCategories();
+
 
 // shb plant load korar code
 const loadAllPlants = () => {
@@ -101,8 +110,8 @@ const displayAllPlants = (datas) => {
     }
     )};
 }
-const allPlantsLi = document.getElementById("all-tree-li");
-allPlantsLi.addEventListener("click", loadAllPlants);
+const allPlantsLi = document.getElementById("all-tree-li"); allPlantsLi.addEventListener("click", () => { setActiveCategory("all-tree-li");
+});
 loadAllPlants();
 
 const loadFeaturedPlant = (id) => {
