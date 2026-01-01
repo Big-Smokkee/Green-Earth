@@ -45,14 +45,14 @@ const displayAllPlants = (datas) => {
         <button class="btn btn-success bg-[#15803D] text-white rounded-full add-to-cart-btn">Add to Cart</button>
         </div> `;
     plantCardContainer.append(div);
-    //Attach event listener for this card
+    //event listener for this card
     const addToCartBtn = div.querySelector(".add-to-cart-btn");
 
     
 
     addToCartBtn.addEventListener("click", () => {
       const plantName = div.querySelector(".plant-name").innerText;
-      const plantPrice = div.querySelector(".plant-price").innerText;
+      const plantPrice = parseInt(div.querySelector(".plant-price").innerText);
       // Checking if plant age theke ache in cart
       let existingItem = cart.find((item) => item.name === plantName);
       if (existingItem) {
@@ -60,28 +60,47 @@ const displayAllPlants = (datas) => {
       } else {
         cart.push({ name: plantName, price: plantPrice, count: 1 });
       }
+      renderCart();
+      function renderCart(){
+          //   getting the cart card container
+          const cartCardContainer = document.getElementById("cart-card-container");
+          cartCardContainer.innerHTML = "";
+          cart.forEach((item, index) => {
+            const divChild = document.createElement("div");
+            divChild.innerHTML = `
+                <div class="card flex flex-row justify-between items-center m-3 p-2 bg-[#F0FDF4] mb-2">
+                <div>
+                <h4 class="inter text-sm">${item.name}</h4>
+                <p class="text-[#00000050]">
+                <i class="fa-solid fa-bangladeshi-taka-sign"></i> <span>${item.price}</span> <span><i class="fa-solid fa-x"></i></span> <span>${item.count}</span>
+                </p> </div> <span class="remove-btn cursor-pointer"><i class="fa-solid fa-x"></i></span>
+                </div> 
+            `;
 
-      //   getting the cart card container
-      const cartCardContainer = document.getElementById("cart-card-container");
-      cartCardContainer.innerHTML = "";
-      cart.forEach(item =>{
-          const divChild = document.createElement("div");
-          divChild.innerHTML = `
-            <div class="card flex flex-row justify-between items-center m-3 p-2 bg-[#F0FDF4] mb-2">
-                    <div>
-                        <h4 class="inter text-sm">${item.name}</h4>
-                        <p class="text-[#00000050]"><i class="fa-solid fa-bangladeshi-taka-sign"></i><span>${item.price}</span> <span><i class="fa-solid fa-x"></i></span> <span>${item.count}</span></p>
-                    </div>
-                    <span><i class="fa-solid fa-x"></i></span>
-                </div>
-          `;
-          cartCardContainer.append(divChild);
-
+            cartCardContainer.append(divChild);
+            const removeBtn = divChild.querySelector(".remove-btn");
+            removeBtn.addEventListener("click", () => { cart.splice(index, 1);
+            renderCart();
       });
-      console.log(plantName, plantPrice);
-    });
-  }
-};
+      
+});
+    // Calculating total price 
+      let totalPrice = cart.reduce((sum, item) => sum + item.price * item.count, 0);
+      const totalDiv = document.createElement("div");
+      totalDiv.innerHTML = `
+        <div class="flex justify-between items-center p-1 m-3 border-t border-gray-300">
+                <p>Total: </p>
+                <p>
+                    <i class="fa-solid fa-bangladeshi-taka-sign"></i><span>${totalPrice}</span>
+                </p>
+            </div>
+      `;
+      cartCardContainer.append(totalDiv);
+      console.log(plantName, plantPrice);  
+    }
+    }
+    )};
+}
 const allPlantsLi = document.getElementById("all-tree-li");
 allPlantsLi.addEventListener("click", loadAllPlants);
 loadAllPlants();
@@ -119,7 +138,7 @@ const displayFeaturedPlant = (datas) => {
 
     addToCartBtn.addEventListener("click", () => {
       const plantName = div.querySelector(".plant-name").innerText;
-      const plantPrice = div.querySelector(".plant-price").innerText;
+      const plantPrice = parseInt(div.querySelector(".plant-price").innerText);
       // Checking if plant age theke ache in cart
       let existingItem = cart.find((item) => item.name === plantName);
       if (existingItem) {
@@ -127,25 +146,44 @@ const displayFeaturedPlant = (datas) => {
       } else {
         cart.push({ name: plantName, price: plantPrice, count: 1 });
       }
+renderCart();
+      function renderCart(){
+          //   getting the cart card container
+          const cartCardContainer = document.getElementById("cart-card-container");
+          cartCardContainer.innerHTML = "";
+          cart.forEach((item, index) => {
+            const divChild = document.createElement("div");
+            divChild.innerHTML = `
+                <div class="card flex flex-row justify-between items-center m-3 p-2 bg-[#F0FDF4] mb-2">
+                <div>
+                <h4 class="inter text-sm">${item.name}</h4>
+                <p class="text-[#00000050]">
+                <i class="fa-solid fa-bangladeshi-taka-sign"></i> <span>${item.price}</span> <span><i class="fa-solid fa-x"></i></span> <span>${item.count}</span>
+                </p> </div> <span class="remove-btn cursor-pointer"><i class="fa-solid fa-x"></i></span>
+                </div> 
+            `;
 
-      //   getting the cart card container
-      const cartCardContainer = document.getElementById("cart-card-container");
-      cartCardContainer.innerHTML = "";
-      cart.forEach(item =>{
-          const divChild = document.createElement("div");
-          divChild.innerHTML = `
-            <div class="card flex flex-row justify-between items-center m-3 p-2 bg-[#F0FDF4] mb-2">
-                    <div>
-                        <h4 class="inter text-sm">${item.name}</h4>
-                        <p class="text-[#00000050]"><i class="fa-solid fa-bangladeshi-taka-sign"></i><span>${item.price}</span> <span><i class="fa-solid fa-x"></i></span> <span>${item.count}</span></p>
-                    </div>
-                    <span><i class="fa-solid fa-x"></i></span>
-                </div>
-          `;
-          cartCardContainer.append(divChild);
-
+            cartCardContainer.append(divChild);
+            const removeBtn = divChild.querySelector(".remove-btn");
+            removeBtn.addEventListener("click", () => { cart.splice(index, 1);
+            renderCart();
       });
-      console.log(plantName, plantPrice);
-    });
-  }
-};
+      
+});
+    // Calculating total price 
+      let totalPrice = cart.reduce((sum, item) => sum + item.price * item.count, 0);
+      const totalDiv = document.createElement("div");
+      totalDiv.innerHTML = `
+        <div class="flex justify-between items-center p-1 m-3 border-t border-gray-300">
+                <p>Total: </p>
+                <p>
+                    <i class="fa-solid fa-bangladeshi-taka-sign"></i><span>${totalPrice}</span>
+                </p>
+            </div>
+      `;
+      cartCardContainer.append(totalDiv);
+      console.log(plantName, plantPrice);  
+    }
+    }
+    )};
+}
