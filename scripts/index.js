@@ -18,7 +18,7 @@ displayCategories = (datas) => {
   for (let data of datas) {
     const ul = document.createElement("ul");
     ul.innerHTML = `
-                    <li id ="list-${data.id}" onClick="setActiveCategory('list-${data.id}');loadFeaturedPlant('${data.id}')"class="h-10 flex items-center pl-[10px] hover:bg-[#15803D] text-black hover:text-white w-[180px] rounded-md pointer">${data.category_name}</li>
+                    <li id ="list-${data.id}" onClick="setActiveCategory('list-${data.id}');loadFeaturedPlant('${data.id}')"class="h-10 flex items-center justify-center md:justify-start pl-[10px] hover:bg-[#24c25e] text-black hover:text-white w-full md:w-[180px] rounded-md cursor-pointer">${data.category_name}</li>
         `;
     categoriesSection.append(ul);
   }
@@ -61,7 +61,7 @@ const displayAllPlants = (datas) => {
     div.innerHTML = `
         <div class="card w-[240px]  bg-white p-4 space-y-[12px]"> 
         <img src="${data.image}" alt="" class="h-[300px] rounded-lg">
-        <h4 class="text-sm font-semibold inter plant-name">${data.name}</h4>
+        <h4 class="text-sm font-semibold inter plant-name cursor-pointer">${data.name}</h4>
         <p class="inter text-xs">${data.description}</p>
         <div class="flex justify-between items-center">
         <p class="btn rounded-full text-[#15803D] bg-[#DCFCE7] text-sm">${data.category}</p>
@@ -126,8 +126,14 @@ const displayAllPlants = (datas) => {
       }
     }
     )
+
+    const plantNameForModal = div.querySelector(".plant-name");
+    plantNameForModal.addEventListener("click", () => {
+      showPlantModal(data);
+    });
   };
   manageSpinner(false);
+
 }
 
 loadAllPlants();
@@ -149,7 +155,7 @@ const displayFeaturedPlant = (datas) => {
     div.innerHTML = `
         <div class="card w-[240px] bg-white p-4 space-y-[12px]">
                     <img src="${data.image}" alt="" class="h-[300px] rounded-lg">
-                    <h4 class="text-sm font-semibold inter plant-name">${data.name}</h4>
+                    <h4 class="text-sm font-semibold inter plant-name cursor-pointer">${data.name}</h4>
                     <p class="inter text-xs">${data.description}</p>
                     <div class="flex justify-between items-center">
                         <p class="btn rounded-full text-[#15803D] bg-[#DCFCE7] text-sm">${data.category}</p>
@@ -213,8 +219,43 @@ const displayFeaturedPlant = (datas) => {
         cartCardContainer.append(totalDiv);
         console.log(plantName, plantPrice);
       }
+
     }
     )
+    const plantNameForModal = div.querySelector(".plant-name");
+    plantNameForModal.addEventListener("click", () => {
+      showPlantModal(data);
+    });
   };
   manageSpinner(false);
+}
+
+function showPlantModal(data) {
+  // remove old modal if exists
+  const oldModal = document.getElementById("plant_modal");
+  if (oldModal) oldModal.remove();
+
+  const modalDiv = document.createElement("div");
+  modalDiv.innerHTML = `
+    <dialog id="plant_modal" class="modal">
+      <div class="modal-box">
+        <h3 class="text-lg font-bold">${data.name}</h3>
+        <img src="${data.image}" class="w-full h-60 object-cover rounded-lg my-3"/>
+        <div class="space-y-3">
+          <p class=""><span class="font-bold">Category: </span>${data.category}</p>
+          <p class=""><span class="font-bold">Price: </span><i class="fa-solid fa-bangladeshi-taka-sign"></i>${data.price}</p>
+          <p class=""><span class="font-bold">Category: </span>${data.description}</p></p>
+          <div class="modal-action">
+            <form method="dialog">
+              <button class="btn">Close</button>
+            </form>
+          </div>
+        </div>
+        
+      </div>
+    </dialog>
+  `;
+
+  document.body.appendChild(modalDiv);
+  document.getElementById("plant_modal").showModal();
 }
