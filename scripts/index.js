@@ -59,7 +59,7 @@ const displayAllPlants = (datas) => {
   for (let data of datas) {
     const div = document.createElement("div");
     div.innerHTML = `
-        <div class="card w-[240px]  bg-white p-4 space-y-[12px]"> 
+        <div class="card w-auto  bg-white p-4 space-y-[12px]"> 
         <img src="${data.image}" alt="" class="h-[300px] rounded-lg">
         <h4 class="text-sm font-semibold inter plant-name cursor-pointer">${data.name}</h4>
         <p class="inter text-xs">${data.description}</p>
@@ -153,7 +153,7 @@ const displayFeaturedPlant = (datas) => {
   for (let data of datas) {
     const div = document.createElement("div");
     div.innerHTML = `
-        <div class="card w-[240px] bg-white p-4 space-y-[12px]">
+        <div class="card w-auto bg-white p-4 space-y-[12px]">
                     <img src="${data.image}" alt="" class="h-[300px] rounded-lg">
                     <h4 class="text-sm font-semibold inter plant-name cursor-pointer">${data.name}</h4>
                     <p class="inter text-xs">${data.description}</p>

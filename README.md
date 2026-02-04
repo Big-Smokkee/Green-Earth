@@ -1,169 +1,51 @@
-## WELCOME TO ( সহজ সরল সিম্পল ) ASSIGNMENT-006
+## 1. Difference between var, let, and const
 
-### 📅 Deadline For 60 marks: 9th September, 2025 (11:59 pm ⏱️)
+In JavaScript, var, let, and const are used to declare variables, but they behave differently.
 
-### 📅 Deadline For 50 marks : 13th September , 2025 (6:00 pm⏱️)
+var is the old way of declaring variables. It is function‑scoped, which means it is available throughout the function where it is declared. One problem with var is that it can be redeclared and updated anywhere, which can cause bugs. Because of this, var is not recommended in modern JavaScript.
 
-### 📅 Deadline For 30 marks: Any time after 13the September , 2025 (6:01 pm⏱️).
+let was introduced in ES6. It is block‑scoped, meaning it only works inside the block (like inside {}) where it is declared. You can change the value of a let variable, but you cannot redeclare it in the same scope. let is useful when you know the value will change.
 
----
-# Green Earth
+const is also block‑scoped. Once a value is assigned to a const variable, it cannot be reassigned. This makes code safer and easier to understand. However, for objects and arrays declared with const, their contents can still be modified.
 
+## 2. Difference between map(), forEach(), and filter()
 
-## Private Repository: https://classroom.github.com/a/nVZrg5R9 
+These three methods are used with arrays, but they are used for different purposes.
 
-## Alternative Private Repository: https://classroom.github.com/a/KCGI14ST 
+map() is used when you want to transform or change each element of an array and get a new array as a result. For example, if you want to double all numbers in an array, map() is the best choice.
 
-## Alternative Private Repository: https://classroom.github.com/a/JMuIYqgK 
+forEach() is used when you want to perform an action on each element of an array, such as printing values or updating something outside the array. It does not return a new array.
 
+filter() is used when you want to select some elements from an array based on a condition. It returns a new array containing only the elements that satisfy the condition.
 
----
-🌴 API Endpoints
----
-1. Get 🌴All Plants
-```bash
-https://openapi.programming-hero.com/api/plants
-```
+## 3. Arrow Functions in ES6
 
-2. Get 🌴All categories <br/>
-```bash
-https://openapi.programming-hero.com/api/categories
-```
+Arrow functions are a shorter and cleaner way to write functions in JavaScript. They were introduced in ES6 to make the code easier to read and write.
 
+For example:
+const add = (a, b) => a + b;
 
-3. Get 🌴plants by categories <br/>
-```bash
-https://openapi.programming-hero.com/api/category/${id}
-```
 
-```bash
-https://openapi.programming-hero.com/api/category/1
-```
+Arrow functions are especially useful because they do not have their own `this` keyword. This makes them very helpful when working with callbacks and modern JavaScript frameworks.
 
-4. Get 🌴Plants Detail <br/>
 
-```bash
-https://openapi.programming-hero.com/api/plant/${id}
-```
+## 4. Destructuring Assignment in ES6
 
-```bash
-https://openapi.programming-hero.com/api/plant/1
-```
----
+Destructuring assignment allows you to extract values from arrays or objects and store them into variables in a simple way.
 
+For arrays, destructuring lets you assign values based on their position. For objects, it lets you extract values using property names. This feature reduces repetitive code and makes programs cleaner and more readable.
 
+Example:
+const user = { name: "Ali", age: 22 };
+const { name, age } = user;
 
+## 5. Template Literals in ES6
 
-## ✅ Main Requirements 
+Template literals are used to create strings in a more readable and powerful way. They use backticks instead of quotes and allow variables and expressions to be written directly inside the string.
 
-#### 1) Navbar
+Example:
 
-- Website **logo/name** on the **left**  
-- **Menu items** in the **center** 
-- **Plant a Tree button** on the **right** 
+const name = "Ali";
+const message = `Hello ${name}`;
 
-#### 2) Banner 
-- A **background image**  
-- A **title** and **subtitle**  
-- A **centered button**  
-
-#### 3) About Campaign
-- **Section heading**  
-- **Image on the left**, **text on the right**  
-
-#### 4) Our Impact Section 
-- Show **3 cards** with campaign **statistics**  
-
-#### 5) Plant a Tree Today Section & Footer
-- **Form**: Name, Email, Number of Trees  
-- **Footer** with copyright info 
-
-#### 6) Responsiveness 
-- Website must be **mobile responsive**  
-
----
-#### 7) Create a README file to answer the following question-
-
-
-#### 1) What is the difference between var, let, and const?
-
-#### 2) What is the difference between map(), forEach(), and filter()? 
-
-#### 3) What are arrow functions in ES6?
-
-#### 4) How does destructuring assignment work in ES6?
-
-#### 5) Explain template literals in ES6. How are they different from string concatenation?
-
-## ⚙️ Functionalities 
-
-1) Category Loading 
-Load Tree Categories dynamically on the left side.
-
-2) Category Click → Tree Data 
-On clicking a category: load trees of that category.
-
-Display in a 3-column card layout.
-
-3) Card Contents 
- Each card includes:
-
-        - Image
-
-        -  Name
-
-        - Short description
-
-        - Category
-
-        - Price
-
-        - Add to Cart button
-
-4) Modal on Card Click 
-Clicking a tree name on a card opens a modal with full tree details.
-
-
-##  🧪 Challenges 
-
-
-    1) Add to Cart 
-    Clicking Add to Cart: - Adds the tree to Cart List
-                          - Shows tree name 
-
-    2) Total Calculation 
-    Calculate total price of trees in cart.
-
-    3) Remove from Cart 
-    Clicking ❌ removes tree and deducts price from total.
-
-    4) Loading Spinner
-    Show spinner while data is loading.
-
-    5) Active Button State 
-    Highlight active category button when selected.
-
-
-
-🧰 Technology Stack:
-        
-        HTML
-
-        CSS (Vanilla / Tailwind / DaisyUI)
-
-        JavaScript (Vanilla only, no frameworks)
-
-📌 Rules
-✅ At least 5 meaningful commits
-
-❌ No dummy text or Lorem Ipsum — must use relevant content
-
-
-
-
-
-## 🔗 Submission
-- **Live Link :** YOUR_DEPLOYED_URL_HERE  
-- **GitHub Private Repository:** YOUR_REPO_URL_HERE  
-
----
+Unlike traditional string concatenation using the `+` operator, template literals are easier to read and support multi‑line strings naturally. This makes them very useful when working with dynamic text.
