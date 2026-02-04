@@ -1,5 +1,5 @@
 // cart logic 1
-    let cart = [];
+let cart = [];
 // shb category load korar code
 const loadCategories = () => {
   const url = "https://openapi.programming-hero.com/api/categories";
@@ -11,9 +11,9 @@ displayCategories = (datas) => {
   const categoriesSection = document.getElementById("category-section");
   categoriesSection.innerHTML = "";
 
-    /////
-    const allTreeLi = document.getElementById("all-tree-li");
-    allTreeLi.classList.add("active-category");
+  /////
+  const allTreeLi = document.getElementById("all-tree-li");
+  allTreeLi.classList.add("active-category");
 
   for (let data of datas) {
     const ul = document.createElement("ul");
@@ -23,15 +23,31 @@ displayCategories = (datas) => {
     categoriesSection.append(ul);
   }
 };
-function setActiveCategory(selectedId){
-    document.querySelectorAll("#all-tree-li, #category-section li").forEach(li => li.classList.remove("active-category") );
-    document.getElementById(selectedId).classList.add("active-category");
+function setActiveCategory(selectedId) {
+  document.querySelectorAll("#all-tree-li, #category-section li").forEach(li => li.classList.remove("active-category"));
+  document.getElementById(selectedId).classList.add("active-category");
 }
 loadCategories();
 
-
+// spinner manage er code
+const manageSpinner = (status) => {
+  if (status == true) {
+    document.getElementById("spinner").classList.remove("hidden");
+    document.getElementById("mid-section").classList.add("hidden");
+  }
+  else {
+    document.getElementById("mid-section").classList.remove("hidden");
+    document.getElementById("spinner").classList.add("hidden");
+  }
+}
+const allPlantsLi = document.getElementById("all-tree-li");
+allPlantsLi.addEventListener("click", () => {
+  setActiveCategory("all-tree-li");
+  loadAllPlants();
+});
 // shb plant load korar code
 const loadAllPlants = () => {
+  manageSpinner(true);
   const url = "https://openapi.programming-hero.com/api/plants";
   fetch(url)
     .then((res) => res.json())
@@ -57,7 +73,7 @@ const displayAllPlants = (datas) => {
     //event listener for this card
     const addToCartBtn = div.querySelector(".add-to-cart-btn");
 
-    
+
 
     addToCartBtn.addEventListener("click", () => {
       const plantName = div.querySelector(".plant-name").innerText;
@@ -70,13 +86,13 @@ const displayAllPlants = (datas) => {
         cart.push({ name: plantName, price: plantPrice, count: 1 });
       }
       renderCart();
-      function renderCart(){
-          //   getting the cart card container
-          const cartCardContainer = document.getElementById("cart-card-container");
-          cartCardContainer.innerHTML = "";
-          cart.forEach((item, index) => {
-            const divChild = document.createElement("div");
-            divChild.innerHTML = `
+      function renderCart() {
+        //   getting the cart card container
+        const cartCardContainer = document.getElementById("cart-card-container");
+        cartCardContainer.innerHTML = "";
+        cart.forEach((item, index) => {
+          const divChild = document.createElement("div");
+          divChild.innerHTML = `
                 <div class="card flex flex-row justify-between items-center m-3 p-2 bg-[#F0FDF4] mb-2">
                 <div>
                 <h4 class="inter text-sm">${item.name}</h4>
@@ -86,17 +102,18 @@ const displayAllPlants = (datas) => {
                 </div> 
             `;
 
-            cartCardContainer.append(divChild);
-            const removeBtn = divChild.querySelector(".remove-btn");
-            removeBtn.addEventListener("click", () => { cart.splice(index, 1);
+          cartCardContainer.append(divChild);
+          const removeBtn = divChild.querySelector(".remove-btn");
+          removeBtn.addEventListener("click", () => {
+            cart.splice(index, 1);
             renderCart();
-      });
-      
-});
-    // Calculating total price 
-      let totalPrice = cart.reduce((sum, item) => sum + item.price * item.count, 0);
-      const totalDiv = document.createElement("div");
-      totalDiv.innerHTML = `
+          });
+
+        });
+        // Calculating total price 
+        let totalPrice = cart.reduce((sum, item) => sum + item.price * item.count, 0);
+        const totalDiv = document.createElement("div");
+        totalDiv.innerHTML = `
         <div class="flex justify-between items-center p-1 m-3 border-t border-gray-300">
                 <p>Total: </p>
                 <p>
@@ -104,17 +121,19 @@ const displayAllPlants = (datas) => {
                 </p>
             </div>
       `;
-      cartCardContainer.append(totalDiv);
-      console.log(plantName, plantPrice);  
+        cartCardContainer.append(totalDiv);
+        console.log(plantName, plantPrice);
+      }
     }
-    }
-    )};
+    )
+  };
+  manageSpinner(false);
 }
-const allPlantsLi = document.getElementById("all-tree-li"); allPlantsLi.addEventListener("click", () => { setActiveCategory("all-tree-li");
-});
+
 loadAllPlants();
 
 const loadFeaturedPlant = (id) => {
+  manageSpinner(true);
   const url = `https://openapi.programming-hero.com/api/category/${id}`;
   fetch(url)
     .then((res) => res.json())
@@ -143,7 +162,7 @@ const displayFeaturedPlant = (datas) => {
     //Attach event listener for this card
     const addToCartBtn = div.querySelector(".add-to-cart-btn");
 
-    
+
 
     addToCartBtn.addEventListener("click", () => {
       const plantName = div.querySelector(".plant-name").innerText;
@@ -155,14 +174,14 @@ const displayFeaturedPlant = (datas) => {
       } else {
         cart.push({ name: plantName, price: plantPrice, count: 1 });
       }
-renderCart();
-      function renderCart(){
-          //   getting the cart card container
-          const cartCardContainer = document.getElementById("cart-card-container");
-          cartCardContainer.innerHTML = "";
-          cart.forEach((item, index) => {
-            const divChild = document.createElement("div");
-            divChild.innerHTML = `
+      renderCart();
+      function renderCart() {
+        //   getting the cart card container
+        const cartCardContainer = document.getElementById("cart-card-container");
+        cartCardContainer.innerHTML = "";
+        cart.forEach((item, index) => {
+          const divChild = document.createElement("div");
+          divChild.innerHTML = `
                 <div class="card flex flex-row justify-between items-center m-3 p-2 bg-[#F0FDF4] mb-2">
                 <div>
                 <h4 class="inter text-sm">${item.name}</h4>
@@ -172,17 +191,18 @@ renderCart();
                 </div> 
             `;
 
-            cartCardContainer.append(divChild);
-            const removeBtn = divChild.querySelector(".remove-btn");
-            removeBtn.addEventListener("click", () => { cart.splice(index, 1);
+          cartCardContainer.append(divChild);
+          const removeBtn = divChild.querySelector(".remove-btn");
+          removeBtn.addEventListener("click", () => {
+            cart.splice(index, 1);
             renderCart();
-      });
-      
-});
-    // Calculating total price 
-      let totalPrice = cart.reduce((sum, item) => sum + item.price * item.count, 0);
-      const totalDiv = document.createElement("div");
-      totalDiv.innerHTML = `
+          });
+
+        });
+        // Calculating total price 
+        let totalPrice = cart.reduce((sum, item) => sum + item.price * item.count, 0);
+        const totalDiv = document.createElement("div");
+        totalDiv.innerHTML = `
         <div class="flex justify-between items-center p-1 m-3 border-t border-gray-300">
                 <p>Total: </p>
                 <p>
@@ -190,9 +210,11 @@ renderCart();
                 </p>
             </div>
       `;
-      cartCardContainer.append(totalDiv);
-      console.log(plantName, plantPrice);  
+        cartCardContainer.append(totalDiv);
+        console.log(plantName, plantPrice);
+      }
     }
-    }
-    )};
+    )
+  };
+  manageSpinner(false);
 }
